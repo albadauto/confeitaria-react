@@ -19,7 +19,7 @@ const sliceLanguages = createSlice({
     reducers: {
         addLanguages(state: any, { payload }: PayloadAction<string>){
             return [...state, {name: payload, favorite: false}]
-        }
+        },
     }
 })
 

@@ -5,7 +5,9 @@ export default function App() {
   return (
     <>
       <Header />
-      <Routes />
+      <div className='container'>
+        <Routes />
+      </div>
     </>
   )
 }
