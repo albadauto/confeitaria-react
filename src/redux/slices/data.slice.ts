@@ -1,15 +1,15 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { IData } from "../../interfaces/user.interface";
+import { IUser } from "../../interfaces/user.interface";
 
-const INITIAL_STATE: IData[] = [
-    { name:'', cpf:'', address:''} 
+const INITIAL_STATE: IUser[] = [
+    { name:'', cpf:'', address:'', password:'', email:''} 
 ]
 
 const dataSlice = createSlice({
     name: 'data',
     initialState: INITIAL_STATE,
     reducers: {
-        addData(state: any, { payload }: PayloadAction<IData>){
+        addData(state: any, { payload }: PayloadAction<IUser>){
             return [...state, {name: payload.name, cpf:payload.cpf, address:payload.cpf}]
         }
     }
@@ -18,7 +18,7 @@ const dataSlice = createSlice({
 export default dataSlice.reducer
 export const { addData } = dataSlice.actions;
 export const useData = (state:any) => {
-    return state.data as IData[]
+    return state.data as IUser[]
 }
 
 //Payload => Informações que virão

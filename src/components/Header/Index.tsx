@@ -11,21 +11,6 @@ export default function Header() {
     dispatch(verifyLoginMenu())
   }, [])
 
-  function handleLoginTest() {
-    if (!localStorage.getItem("token")) {
-      localStorage.setItem("token", "fasdfasdfasdfas")
-      window.location.reload()
-
-    } else {
-      window.location.reload()
-    }
-  }
-
-  function unsign() {
-    localStorage.removeItem("token")
-    window.location.reload()
-  }
-
   return (
     <Navbar expand="lg">
       {localStorage.getItem("token")}
@@ -38,8 +23,8 @@ export default function Header() {
             style={{ maxHeight: '100px' }}
             navbarScroll
           >
-            <Nav.Link href="/login" onClick={() => handleLoginTest()}>{menuData.login}</Nav.Link>
-            <Nav.Link href="#action2" onClick={() => unsign()}>Deslogar</Nav.Link>
+            <Nav.Link href={menuData.linkLogin} >{menuData.login}</Nav.Link>
+            { menuData.deslogar && <Nav.Link href="#action2" >Deslogar</Nav.Link> }
             <NavDropdown title="Link" id="navbarScrollingDropdown">
               <NavDropdown.Item href="#action3">Action</NavDropdown.Item>
               <NavDropdown.Item href="#action4">

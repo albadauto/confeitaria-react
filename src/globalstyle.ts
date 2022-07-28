@@ -10,4 +10,10 @@ export const GlobalStyle = createGlobalStyle`
         background-color: #F57EB6;
         color: white;
     }
+
+    .sysButtonUpperCase{
+        background-color: #F57EB6;
+        color: white;
+        font-size: 20px;
+    }
 `

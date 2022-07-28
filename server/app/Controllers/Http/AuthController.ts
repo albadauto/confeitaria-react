@@ -8,7 +8,7 @@ export default class AuthController {
             return response.status(200).json({
                 token
             })
-        }catch {
+        } catch {
             return response.status(400).json({
                 message: "User not found!"
             })
