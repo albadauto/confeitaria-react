@@ -18,7 +18,6 @@ export default function Header() {
 
     } else {
       window.location.reload()
-
     }
   }
 
@@ -28,18 +27,18 @@ export default function Header() {
   }
 
   return (
-    <Navbar bg="light" expand="lg">
+    <Navbar expand="lg">
       {localStorage.getItem("token")}
-      <Container fluid>
-        <Navbar.Brand href="#">Navbar scroll</Navbar.Brand>
+      <Container >
+        <Navbar.Brand href="/" style={{color: "#fff", fontWeight: "bold"}}>Confeitaria - React</Navbar.Brand>
         <Navbar.Toggle aria-controls="navbarScroll" />
         <Navbar.Collapse id="navbarScroll">
           <Nav
-            className="me-auto my-2 my-lg-0"
+            className="ms-auto my-2 my-lg-0"
             style={{ maxHeight: '100px' }}
             navbarScroll
           >
-            <Nav.Link href="#action1" onClick={() => handleLoginTest()}>{menuData.login}</Nav.Link>
+            <Nav.Link href="/login" onClick={() => handleLoginTest()}>{menuData.login}</Nav.Link>
             <Nav.Link href="#action2" onClick={() => unsign()}>Deslogar</Nav.Link>
             <NavDropdown title="Link" id="navbarScrollingDropdown">
               <NavDropdown.Item href="#action3">Action</NavDropdown.Item>
@@ -55,15 +54,7 @@ export default function Header() {
               Link
             </Nav.Link>
           </Nav>
-          <Form className="d-flex">
-            <Form.Control
-              type="search"
-              placeholder="Search"
-              className="me-2"
-              aria-label="Search"
-            />
-            <Button variant="outline-success">Search</Button>
-          </Form>
+         
         </Navbar.Collapse>
       </Container>
     </Navbar>

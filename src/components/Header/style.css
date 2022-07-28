@@ -1,0 +1,10 @@
+.navbar,
+.navbar-default {
+    background-color:  	#F57ED6 !important; /* override background image gradient w/ flat color */
+}
+
+.navbar-light .navbar-nav .nav-link{
+    color: white!important;
+    font-size: 17px;
+    margin-left: 9px;
+}
