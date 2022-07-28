@@ -6,3 +6,9 @@
 .carousel-item img {
     width: 100%;
 }
+
+@media screen and (max-device-width: 480px) {
+    .carousel-item{
+        height: 200px;
+    }
+}
