@@ -24,5 +24,7 @@ Route.group(() => {
   Route.get("/", () => {
     return 'Hello world'
   })
-  Route.post("/auth", "AuthController.verifyPassword")
+  Route.post("/auth", "AuthController.verifyPassword");
+  Route.post("/auth/createNewUser", "AuthController.createNewUser");
+
 }).prefix("api")

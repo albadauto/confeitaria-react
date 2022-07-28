@@ -1,4 +1,4 @@
-import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { createSlice } from "@reduxjs/toolkit";
 import { IMenu } from "../../interfaces/menu.interface";
 
 const INITIAL_STATE: IMenu = { login: 'Login', linkLogin: '/login', deslogar: false }
@@ -8,7 +8,7 @@ const MenuSlice = createSlice({
     initialState: INITIAL_STATE,
     reducers: {
         verifyLoginMenu(state: IMenu) {
-            if (localStorage.getItem("token")) {
+            if (sessionStorage.getItem("token")) {
                 return { ...state, login: 'Minha conta', linkLogin: '/myaccount', deslogar: true }
             } else {
                 return { ...state, login: 'Login', linkLogin: '/login', deslogar: false }

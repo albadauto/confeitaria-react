@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import { Button, Container, Form, Nav, Navbar, NavDropdown } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import { useMenu, verifyLoginMenu } from '../../redux/slices/menu-slice';
+import { useNavigate } from 'react-router-dom'
 import "./style.css";
 export default function Header() {
   const dispatch = useDispatch();
@@ -11,9 +12,13 @@ export default function Header() {
     dispatch(verifyLoginMenu())
   }, [])
 
+  function handleUnsign(): void{
+    sessionStorage.removeItem("token");
+    window.location.reload();
+  }
+
   return (
     <Navbar expand="lg">
-      {localStorage.getItem("token")}
       <Container >
         <Navbar.Brand href="/" style={{color: "#fff", fontWeight: "bold"}}>Confeitaria - React</Navbar.Brand>
         <Navbar.Toggle aria-controls="navbarScroll" />
@@ -23,8 +28,9 @@ export default function Header() {
             style={{ maxHeight: '100px' }}
             navbarScroll
           >
+            <Nav.Link href="/" >Home</Nav.Link>
             <Nav.Link href={menuData.linkLogin} >{menuData.login}</Nav.Link>
-            { menuData.deslogar && <Nav.Link href="#action2" >Deslogar</Nav.Link> }
+            { menuData.deslogar && <Nav.Link href="#action2" onClick={() => handleUnsign()}>Deslogar</Nav.Link> }
             <NavDropdown title="Link" id="navbarScrollingDropdown">
               <NavDropdown.Item href="#action3">Action</NavDropdown.Item>
               <NavDropdown.Item href="#action4">

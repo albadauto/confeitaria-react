@@ -1,11 +1,21 @@
 import React, { useState } from 'react'
 import { Col, Row, Container, Form, FloatingLabel, Button } from 'react-bootstrap'
+import { toast } from 'react-toastify';
+import { api } from '../../api';
 import { IUser } from '../../interfaces/user.interface';
 import "./style.css"
+
 export default function Login() {
   const [userData, setUserData] = useState<IUser>({} as IUser)
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
+    try {
+      const response = await api.post("/auth", userData);
+      const token = response.data.token.token;
+      sessionStorage.setItem("token", token);
+    } catch {
+      toast.error("Erro: Usuário não encontrado")
+    }
   }
 
   return (
@@ -19,7 +29,7 @@ export default function Login() {
         <Row>
           <Col className="mx-5">
             <FloatingLabel label="Email">
-              <Form.Control type="text" placeholder='Email' value={userData.email} onChange={(e: React.ChangeEvent<HTMLInputElement>) => setUserData({ ...userData, name: e.target.value })} />
+              <Form.Control type="text" placeholder='Email' value={userData.email} onChange={(e: React.ChangeEvent<HTMLInputElement>) => setUserData({ ...userData, email: e.target.value })} />
             </FloatingLabel>
           </Col>
         </Row>
@@ -27,14 +37,14 @@ export default function Login() {
         <Row>
           <Col className="mx-5">
             <FloatingLabel label="Senha">
-              <Form.Control type="text" placeholder='Senha' />
+              <Form.Control type="password" placeholder='Senha' value={userData.password} onChange={(e: React.ChangeEvent<HTMLInputElement>) => setUserData({ ...userData, password: e.target.value })} />
             </FloatingLabel>
           </Col>
         </Row>
 
         <Row>
           <Col className="mx-5 mt-3 text-center">
-            <Button className="sysButtonUpperCase" variant="light">Login</Button>
+            <Button className="sysButtonUpperCase" variant="light" type="submit">Login</Button>
           </Col>
         </Row>
         <Row>
