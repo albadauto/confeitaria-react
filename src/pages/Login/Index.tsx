@@ -1,20 +1,33 @@
 import React, { useState } from 'react'
 import { Col, Row, Container, Form, FloatingLabel, Button } from 'react-bootstrap'
+import { useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { api } from '../../api';
 import { IUser } from '../../interfaces/user.interface';
+import { logged } from '../../redux/slices/menu-slice';
 import "./style.css"
 
 export default function Login() {
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
   const [userData, setUserData] = useState<IUser>({} as IUser)
+  const [loading, setLoading] = useState<boolean>(false);
+
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
+      setLoading(true);
     try {
       const response = await api.post("/auth", userData);
       const token = response.data.token.token;
       sessionStorage.setItem("token", token);
+      navigate("/")
+      dispatch(logged())
     } catch {
       toast.error("Erro: Usuário não encontrado")
+    }finally{
+      
+      setLoading(false)
     }
   }
 
@@ -57,7 +70,15 @@ export default function Login() {
             <a href="">Esqueci minha senha</a>
           </Col>
         </Row>
+      {loading && 
+        <Row>
+          <Col className="text-center font-weight-bold">
+            <h4>Carregando...</h4>
+          </Col>
+        </Row>
+      }
       </Form>
+
     </Container>
   )
 }

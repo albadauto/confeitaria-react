@@ -1,17 +1,21 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Button, Container, Form, Nav, Navbar, NavDropdown } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
-import { useMenu, verifyLoginMenu } from '../../redux/slices/menu-slice';
+import { useMenu, logged, notLogged } from '../../redux/slices/menu-slice';
 import { useNavigate } from 'react-router-dom'
 import "./style.css";
+import { IMenu } from '../../interfaces/menu.interface';
 export default function Header() {
   const dispatch = useDispatch();
   const menuData = useSelector(useMenu);
-
   useEffect(() => {
-    dispatch(verifyLoginMenu())
+    if (!sessionStorage.getItem("token")){
+      dispatch(notLogged())
+    }else{
+      dispatch(logged())
+    }
+  
   }, [])
-
   function handleUnsign(): void{
     sessionStorage.removeItem("token");
     window.location.reload();

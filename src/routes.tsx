@@ -7,8 +7,6 @@ import Login from './pages/Login/Index'
 export default function Routes() {
   return (
     <BrowserRouter>
-      <Header />
-
         <Rt>
             <Route path='/' element={<Home />} />
             <Route path='/login' element={<Login />} />
